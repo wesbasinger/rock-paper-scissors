@@ -4,10 +4,14 @@
     <title>Socket.IO Rock Paper Scissors</title>
   </head>
   <body>
+	<h1>Messages: <span id="messages"></span></h1>
 	<h1>Player One: <span id="p1"></span></h1>
 	<h1>Player Two: <span id="p2"></span></h1>
 	<h2>You play...</h2>
-	<input id="you" /><button>Send</button>
+	<input type="radio" name="uplay" value="rock">Rock
+	<input type="radio" name="uplay" value="paper">Paper
+	<input type="radio" name="uplay" value="scissors">Scissors
+	<button>Send</button>
 	<h1>Result: <span id="result"></span></h1>
 	<!---
     <ul id="messages"></ul>
