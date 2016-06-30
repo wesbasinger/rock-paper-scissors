@@ -26,6 +26,16 @@
 		socket.on('welcome', msg => {
 			$('#messages').text(msg.msg);
 		});
+		var radios = document.getElementsByName('uplay');
+		for (radio in radios) {
+			radios[radio].onclick = function() {
+				if ($('#messages').text() == "You are player 1!!!") {
+					$('#p1').text(this.value);
+				} else if ($('#messages').text() == "You are player 2!!!") {
+					$('#p2').text(this.value);
+				}
+			}
+		}
 	</script>
 
   </body>
