@@ -1,0 +1,25 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "0.1.0",
+  "description": "A tiny little rock paper scissors game.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/dbumathlete/rock-paper-scissors.git"
+  },
+  "keywords": [
+    "game",
+    "socket.io",
+    "fun"
+  ],
+  "author": "Wes Basinger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/dbumathlete/rock-paper-scissors/issues"
+  },
+  "homepage": "https://gitlab.com/dbumathlete/rock-paper-scissors#README",
+  "private": true
+}
