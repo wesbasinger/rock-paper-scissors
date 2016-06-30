@@ -21,7 +21,13 @@ io.on('connection', socket => {
 	}
 
 	socket.on('played', packet => {
-		console.log("heard the event");
+		if (socket === players[0]) {
+			players[1].emit('otherplayer',  {other: packet})
+		} else if (socket === players[1]) {
+			players[0].emit('otherplayer', {other: packet})
+		} else {
+			console.error("I don't know what happened.")
+		}
 	})
 
 

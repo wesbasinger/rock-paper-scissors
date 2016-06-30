@@ -42,6 +42,9 @@
 				socket.emit('played', {gamePacket:gamePacket});
 			}
 		}
+		socket.on('otherplayer', data => {
+			console.log(data);
+		})
 	</script>
 
   </body>
