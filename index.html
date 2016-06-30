@@ -23,6 +23,7 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io();
+		var gamePacket = {};
 		socket.on('welcome', msg => {
 			$('#messages').text(msg.msg);
 		});
@@ -31,9 +32,14 @@
 			radios[radio].onclick = function() {
 				if ($('#messages').text() == "You are player 1!!!") {
 					$('#p1').text(this.value);
+					gamePacket.player = 1;
+					gamePacket.choice = this.value;
 				} else if ($('#messages').text() == "You are player 2!!!") {
 					$('#p2').text(this.value);
+					gamePacket.player = 2;
+					gamePacket.choice = this.value;
 				}
+				socket.emit('played', {gamePacket:gamePacket});
 			}
 		}
 	</script>

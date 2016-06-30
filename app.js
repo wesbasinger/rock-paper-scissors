@@ -19,7 +19,12 @@ io.on('connection', socket => {
 	} else {
 		socket.emit("welcome", {msg: "You are not welcome."});
 	}
-	
+
+	socket.on('played', packet => {
+		console.log("heard the event");
+	})
+
+
 	socket.on('disconnect', () => {
 		console.log('a user disconnected.');
 	});
