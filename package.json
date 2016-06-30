@@ -21,5 +21,8 @@
     "url": "https://gitlab.com/dbumathlete/rock-paper-scissors/issues"
   },
   "homepage": "https://gitlab.com/dbumathlete/rock-paper-scissors#README",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "express": "^4.10.2"
+  }
 }
