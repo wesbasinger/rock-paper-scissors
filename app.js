@@ -31,6 +31,7 @@ io.on('connection', socket => {
 	}
 
 	socket.on('played', packet => {
+		socket.emit('test', {msg: "TCP is working.."});
 		if (socket === players[0]) {
 			game.player1 = packet.gamePacket.player1;
 			playedCount ++;
@@ -47,7 +48,6 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
-			player = []
 			playedCount = 0;
 			game = {};
 		}
