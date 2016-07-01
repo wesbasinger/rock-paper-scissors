@@ -1,6 +1,11 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+var winner = require('./winner');
+
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
@@ -8,33 +13,6 @@ app.get('/', (req, res) => {
 
 var players = []
 var playedCount = 0;
-
-function declareWinner(first, second) {
-	var gameObjects = {
-		"rock" : {
-			losesTo: "paper",
-			beats: "scissors"
-		},
-
-		"paper":  {
-			losesTo: "scissors",
-			beats: "rock"
-		},
-
-		"scissors":  {
-			losesTo: "rock",
-			beats: "paper"
-		}
-}
-
-	if (gameObjects[first].losesTo == second) {
-		return second;
-	} else if (gameObjects[first].beats == second) {
-		return first;
-	} else  {
-		return "Tie game!";
-	}
-}
 
 var game = {};
 
@@ -63,9 +41,9 @@ io.on('connection', socket => {
 			console.error("I don't know what happened.")
 		}
 		if (playedCount === 2) {
-			var winner = declareWinner(game.player1, game.player2);
+			var champ = winner(game.player1, game.player2);
 			players.forEach(player => {
-				player.emit('gameOver', {msg:winner, game:game});
+				player.emit('gameOver', {msg:champ, game:game});
 			});
 		}
 	});
