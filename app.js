@@ -47,7 +47,7 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
-			players = [];
+			player = []
 			playedCount = 0;
 			game = {};
 		}
@@ -55,6 +55,7 @@ io.on('connection', socket => {
 
 
 	socket.on('disconnect', () => {
+		players.splice(players.indexOf(socket), 1);
 		console.log('a user disconnected.');
 	});
 });
