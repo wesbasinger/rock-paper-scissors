@@ -9,6 +9,7 @@ app.get('/', (req, res) => {
 var players = []
 
 io.on('connection', socket => {
+	var playedCount = 0;
 	var game = {};
 	console.log('a user connected.');
 	if (players.length === 0) {
@@ -24,11 +25,11 @@ io.on('connection', socket => {
 	socket.on('played', packet => {
 		if (socket === players[0]) {
 			game.player1 = packet.gamePacket.player1;
-			console.log(`Player 1 played ${game.player1}`);
+			playedCount ++;
 			//players[1].emit('otherplayer',  {other: packet})
 		} else if (socket === players[1]) {
 			game.player2 = packet.gamePacket.player2;
-			console.log(`Player 2 played ${game.player2}`);
+			playedCount ++;
 			//players[0].emit('otherplayer', {other: packet})
 		} else {
 			console.error("I don't know what happened.")
@@ -39,6 +40,14 @@ io.on('connection', socket => {
 	socket.on('disconnect', () => {
 		console.log('a user disconnected.');
 	});
+
+	setInterval(()=> {
+		console.log(playedCount)
+		if(playedCount === 2) {
+			console.log("game over");
+			socket.emit('gameOver', {msg: "Game over!!!"});
+		}
+	}, 500)
 });
 
 

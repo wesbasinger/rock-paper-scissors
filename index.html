@@ -66,6 +66,9 @@
 				socket.emit('played', {gamePacket:gamePacket});
 			}
 		}
+		socket.on('gameOver', data => {
+			console.log(data.msg);
+		})
 		/*
 		socket.on('otherplayer', data => {
 			var otherplayer = data.other.gamePacket.player;
