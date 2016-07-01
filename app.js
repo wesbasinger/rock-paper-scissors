@@ -48,7 +48,6 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
-			players = [];
 			playedCount = 0;
 			game = {};
 		}
