@@ -7,6 +7,8 @@ var winner = require('./winner');
 
 app.use(express.static('public'))
 
+app.set('port', process.env.PORT || 3000);
+
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 });
@@ -56,5 +58,5 @@ io.on('connection', socket => {
 
 
 http.listen(3000, () => {
-	console.log('listening on port 3000...');
+	console.log('listening on port ' + app.get('port') + "...");
 });

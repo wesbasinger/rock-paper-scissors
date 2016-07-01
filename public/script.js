@@ -18,7 +18,7 @@ for (radio in radios) {
 }
 socket.on('gameOver', data => {
 	console.log(data.msg);
-	if (data.msg === "Tie Game!") {
+	if (data.msg === "Tie game!") {
 		$('#result').text("Tie Game!!!");
 		if ($('#p1').text() === "") {
 			$('#p1').text(data.game.player1);
