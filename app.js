@@ -28,6 +28,7 @@ io.on('connection', socket => {
 		socket.emit("welcome", {msg:"You are player 2!!!"});
 	} else {
 		socket.emit("welcome", {msg: "You are not welcome."});
+		socket.destroy();
 	}
 
 	socket.on('played', packet => {
@@ -47,6 +48,7 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
+			players = [];
 			playedCount = 0;
 			game = {};
 		}
