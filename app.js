@@ -7,9 +7,9 @@ app.get('/', (req, res) => {
 });
 
 var players = []
+var playedCount = 0;
 
 io.on('connection', socket => {
-	var playedCount = 0;
 	var game = {};
 	console.log('a user connected.');
 	if (players.length === 0) {
@@ -34,20 +34,17 @@ io.on('connection', socket => {
 		} else {
 			console.error("I don't know what happened.")
 		}
-	})
+		if (playedCount === 2) {
+			players.forEach(player => {
+				player.emit('gameOver', {msg: "Game over"});
+			});
+		}
+	});
 
 
 	socket.on('disconnect', () => {
 		console.log('a user disconnected.');
 	});
-
-	setInterval(()=> {
-		console.log(playedCount)
-		if(playedCount === 2) {
-			console.log("game over");
-			socket.emit('gameOver', {msg: "Game over!!!"});
-		}
-	}, 500)
 });
 
 
