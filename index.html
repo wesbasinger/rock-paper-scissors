@@ -12,14 +12,7 @@
 	<input type="radio" name="uplay" value="rock">Rock
 	<input type="radio" name="uplay" value="paper">Paper
 	<input type="radio" name="uplay" value="scissors">Scissors
-	<button>Send</button>
 	<h1>Result: <span id="result"></span></h1>
-	<!---
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-	-->
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io();
@@ -51,12 +44,14 @@
 				}
 			} else {
 				if ($('#p1').text() === "") { // I must be player 2 then
+					$('#p1').text(data.game.player1);
 					if ($('#p2').text() === data.msg) {
 						$('#result').text("You win!!!");
 					} else {
 						$('#result').text("You lose!!!");
 					}
 				} else if ($('#p2').text() === "") { // I must be player 1 then
+					$('#p2').text(data.game.player2);
 					if ($('#p1').text() === data.msg) {
 						$('#result').text("You win!!!");
 					} else {
@@ -68,20 +63,7 @@
 				
 			}
 			
-		})
-		/*
-		socket.on('otherplayer', data => {
-			var otherplayer = data.other.gamePacket.player;
-			if (otherplayer === 1) {
-				$('#p1').text(data.other.gamePacket.choice);
-			} else if (otherplayer === 2) {
-				$('#p2').text(data.other.gamePacket.choice);
-			} else {
-				console.error('I don\'t know what happened.');
-			}
-			//console.log(declareWinner($('#p1').text(),$('#p2').text()));
-		})
-		*/
+		});
 	</script>
 
   </body>
