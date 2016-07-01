@@ -1,4 +1,4 @@
-var socket = io('http://rowshambo.herokuapp.com');
+var socket = io('https://rowshambo.herokuapp.com');
 var gamePacket = {};
 
 socket.on('welcome', msg => {
