@@ -9,8 +9,36 @@ app.get('/', (req, res) => {
 var players = []
 var playedCount = 0;
 
+function declareWinner(first, second) {
+	var gameObjects = {
+		"rock" : {
+			losesTo: "paper",
+			beats: "scissors"
+		},
+
+		"paper":  {
+			losesTo: "scissors",
+			beats: "rock"
+		},
+
+		"scissors":  {
+			losesTo: "rock",
+			beats: "paper"
+		}
+}
+
+	if (gameObjects[first].losesTo == second) {
+		return second;
+	} else if (gameObjects[first].beats == second) {
+		return first;
+	} else  {
+		return "Tie game!";
+	}
+}
+
+var game = {};
+
 io.on('connection', socket => {
-	var game = {};
 	console.log('a user connected.');
 	if (players.length === 0) {
 		players.push(socket);
@@ -35,8 +63,9 @@ io.on('connection', socket => {
 			console.error("I don't know what happened.")
 		}
 		if (playedCount === 2) {
+			var winner = declareWinner(game.player1, game.player2);
 			players.forEach(player => {
-				player.emit('gameOver', {msg: "Game over"});
+				player.emit('gameOver', {msg:winner, game:game});
 			});
 		}
 	});
