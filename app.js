@@ -31,6 +31,7 @@ io.on('connection', socket => {
 	}
 
 	socket.on('played', packet => {
+		socket.emit('test', {msg: "TCP is working.."});
 		if (socket === players[0]) {
 			game.player1 = packet.gamePacket.player1;
 			playedCount ++;
@@ -47,16 +48,19 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
+			playedCount = 0;
+			game = {};
 		}
 	});
 
 
 	socket.on('disconnect', () => {
+		players.splice(players.indexOf(socket), 1);
 		console.log('a user disconnected.');
 	});
 });
 
 
-http.listen(3000, () => {
+http.listen(app.get('port'), () => {
 	console.log('listening on port ' + app.get('port') + "...");
 });
