@@ -31,7 +31,6 @@ io.on('connection', socket => {
 	}
 
 	socket.on('played', packet => {
-		socket.emit('test', {msg: "TCP is working.."});
 		if (socket === players[0]) {
 			game.player1 = packet.gamePacket.player1;
 			playedCount ++;

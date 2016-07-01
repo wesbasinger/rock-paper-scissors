@@ -1,6 +1,5 @@
 var socket = io();
 var gamePacket = {};
-socket.on('test', data => {alert(data.msg)})
 
 socket.on('welcome', msg => {
 	$('#messages').text(msg.msg);
