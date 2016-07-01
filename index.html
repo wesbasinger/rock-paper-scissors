@@ -43,6 +43,13 @@
 		socket.on('gameOver', data => {
 			if (data.msg = "Tie Game!") {
 				$('#result').text("Tie Game!!!");
+				if ($('#p1').text() === "") {
+					console.log(`Player 1 text empty fill with ${data.game.player1}`)
+					$('#p1').text(data.game.player1);
+				} else {
+					console.log(`Player 2 text empty fill with ${data.game.player2}`)
+					$('#p2').text(data.game.player2);
+				}
 			}
 			
 		})
