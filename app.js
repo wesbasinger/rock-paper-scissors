@@ -7,6 +7,8 @@ var winner = require('./winner');
 
 app.use(express.static('public'))
 
+var port = process.env.PORT || 3000;
+
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 });
@@ -45,6 +47,9 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
+			players = [];
+			playedCount = 0;
+			game = {};
 		}
 	});
 
@@ -55,6 +60,6 @@ io.on('connection', socket => {
 });
 
 
-http.listen(3000, () => {
-	console.log('listening on port 3000...');
+http.listen(port, () => {
+	console.log(`listening on port ${port}`);
 });
