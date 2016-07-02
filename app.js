@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
 
 var players = []
 var playedCount = 0;
-
 var game = {};
 
 io.on('connection', socket => {
@@ -31,15 +30,12 @@ io.on('connection', socket => {
 	}
 
 	socket.on('played', packet => {
-		socket.emit('test', {msg: "TCP is working.."});
 		if (socket === players[0]) {
 			game.player1 = packet.gamePacket.player1;
 			playedCount ++;
-			//players[1].emit('otherplayer',  {other: packet})
 		} else if (socket === players[1]) {
 			game.player2 = packet.gamePacket.player2;
 			playedCount ++;
-			//players[0].emit('otherplayer', {other: packet})
 		} else {
 			console.error("I don't know what happened.")
 		}
@@ -48,10 +44,10 @@ io.on('connection', socket => {
 			players.forEach(player => {
 				player.emit('gameOver', {msg:champ, game:game});
 			});
-			playedCount = 0;
-			game = {};
 		}
 	});
+
+	socket.on('newgame', () => {console.log('newgame started.')});
 
 
 	socket.on('disconnect', () => {

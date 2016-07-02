@@ -19,7 +19,11 @@ for (radio in radios) {
 	}
 }
 socket.on('gameOver', data => {
-	console.log(data.msg);
+	var newButton = $('<button id="startgame"></button').text("Start New Game");
+	$('#newgame').append(newButton);
+	$('#startgame').click(() => {
+		alert("You want to start a new game.");
+	});
 	if (data.msg === "Tie game!") {
 		$('#result').text("Tie Game!!!");
 		if ($('#p1').text() === "") {
@@ -47,5 +51,4 @@ socket.on('gameOver', data => {
 		}
 
 	}
-
 });
