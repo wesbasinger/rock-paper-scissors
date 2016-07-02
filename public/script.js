@@ -1,4 +1,4 @@
-var socket = io('https://rowshambo.herokuapp.com');
+var socket = io();
 var gamePacket = {};
 
 socket.on('welcome', msg => {
@@ -27,6 +27,7 @@ socket.on('gameOver', data => {
 		$('#p1').text("");
 		$('#p2').text("");
 		$('#result').text("");
+		$('input[name="uplay"]').prop('checked', false);
 		$('#startgame').remove();
 		socket.emit('newGame', {});
 	});
