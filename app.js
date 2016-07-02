@@ -47,7 +47,14 @@ io.on('connection', socket => {
 		}
 	});
 
-	socket.on('newgame', () => {console.log('newgame started.')});
+	socket.on('newGame', () => {
+		if (playedCount != 0) {
+			playedCount = 0;
+		}
+		if (game != {}) {
+			game = {};
+		}
+	});
 
 
 	socket.on('disconnect', () => {
