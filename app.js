@@ -27,6 +27,7 @@ io.on('connection', socket => {
 		socket.emit("welcome", {msg:"You are player 2!!!"});
 	} else {
 		socket.emit("welcome", {msg: "You are not welcome."});
+		socket.destroy();
 	}
 
 	socket.on('played', packet => {
