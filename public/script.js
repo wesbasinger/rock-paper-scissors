@@ -1,4 +1,18 @@
 var socket = io();
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+class Test extends React.Component {
+	render() {
+		return (
+			<h1>Hello World!</h1>
+		)
+	}
+}
+
+ReactDOM.render(<Test />, document.getElementById('react-container'));
+
+/* OLD SCRIPT
 var gamePacket = {};
 
 socket.on('welcome', msg => {
@@ -59,3 +73,4 @@ socket.on('gameOver', data => {
 
 	}
 });
+*/
