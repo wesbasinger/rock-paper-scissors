@@ -31,21 +31,25 @@ io.on('connection', socket => {
 	}
 
 	socket.on('played', packet => {
+		console.log("Somebody played!");
+		console.log(packet);
 		if (socket === players[0]) {
-			game.player1 = packet.gamePacket.player1;
+			game.player1 = packet.playerOneChoice;
+			console.log(game.player1);
 			playedCount ++;
 		} else if (socket === players[1]) {
-			game.player2 = packet.gamePacket.player2;
+			game.player2 = packet.playerTwoChoice;
+			console.log(game.player2);
 			playedCount ++;
 		} else {
 			console.error("I don't know what happened.")
 		}
-		if (playedCount === 2) {
-			var champ = winner(game.player1, game.player2);
-			players.forEach(player => {
-				player.emit('gameOver', {msg:champ, game:game});
-			});
-		}
+		// if (playedCount === 2) {
+		// 	var champ = winner(game.player1, game.player2);
+		// 	players.forEach(player => {
+		// 		player.emit('gameOver', {msg:champ, game:game});
+		// 	});
+		// }
 	});
 
 	socket.on('newGame', () => {

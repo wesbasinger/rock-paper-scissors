@@ -26,13 +26,16 @@ var Game = React.createClass({
 		} else {
 			this.setState({playerTwoChoice: e.target.value})
 		}
+	},
+
+	handlePlay(e) {
 		socket.emit(
 			'played',
 			{
 				player: this.state.playerPosition,
 				playerOneChoice: this.state.playerOneChoice,
 				playerTwoChoice: this.state.playerTwoChoice
-			})
+			});
 	},
 
  	render() {
@@ -56,6 +59,7 @@ var Game = React.createClass({
 					name="uplay"
 					value="scissors"
 					onChange={this.handleChange}/> Scissors <br />
+				<button onClick={this.handlePlay}>Play</button>
 				<h1>Result: Result goes here...</h1>
 			</div>
 		)
