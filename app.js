@@ -51,11 +51,12 @@ io.on('connection', socket => {
 		}
 	});
 
-	socket.on('disconnect', () => {
+	socket.once('disconnect', () => {
 		players.splice(players.indexOf(socket), 1);
 		players.forEach(player => {
 			player.emit('playerLeft', {msg: "The other player left"});
-		})
+		});
+		socket.disconnect();
 		console.log('a user disconnected.');
 	});
 });
