@@ -68,11 +68,18 @@ var Game = React.createClass({
 				player: this.state.playerPosition,
 				playerOneChoice: this.state.playerOneChoice,
 				playerTwoChoice: this.state.playerTwoChoice
-			});
+			}
+		);
 	},
 
 	newGameGen() {
-		this.setState({result: "", playerOneChoice: "", playerTwoChoice: ""});
+		this.setState(
+			{
+				result: "",
+				playerOneChoice: "",
+				playerTwoChoice: "",
+				message: "New game has started."}
+		);
 		$('input[name="uplay"]').prop('checked', false);
 	},
 
