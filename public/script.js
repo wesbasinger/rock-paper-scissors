@@ -2,15 +2,56 @@ var socket = io();
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-class Test extends React.Component {
-	render() {
-		return (
-			<h1>Hello World!</h1>
+var Game = React.createClass({
+	getInitialState() {
+		return {
+			playerPosition: "",
+			playerChoice: "",
+			result: "",
+			choice: ""
+		}
+	},
+
+	componentDidMount() {
+		socket.on('welcome', this.welcome);
+	},
+
+	welcome(data) {
+		this.setState({playerPosition: data.msg});
+	},
+
+	handleChange(e, value) {
+		this.setState({choice: e.target.value});
+	},
+
+ 	render() {
+		return(
+			<div>
+				<h1>Messages: {this.state.playerPosition} </h1>
+				<h1>Player One: Player one goes here...</h1>
+				<h1>Player Two: Player two goes here...</h1>
+				<input
+					type="radio"
+					name="uplay"
+					value="rock"
+					onChange={this.handleChange}/> Rock <br />
+				<input
+					type="radio"
+					name="uplay"
+					value="paper"
+					onChange={this.handleChange}/> Paper <br />
+				<input
+					type="radio"
+					name="uplay"
+					value="scissors"
+					onChange={this.handleChange}/> Scissors <br />
+				<h1>Result: Result goes here...</h1>
+			</div>
 		)
 	}
-}
+})
 
-ReactDOM.render(<Test />, document.getElementById('react-container'));
+ReactDOM.render(<Game />, document.getElementById('react-container'));
 
 /* OLD SCRIPT
 var gamePacket = {};

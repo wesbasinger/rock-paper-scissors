@@ -21,10 +21,10 @@ io.on('connection', socket => {
 	console.log('a user connected.');
 	if (players.length === 0) {
 		players.push(socket);
-		socket.emit("welcome", {msg:"You are player 1!!!"});
+		socket.emit("welcome", {msg:"playerOne"});
 	} else if (players.length == 1) {
 		players.push(socket);
-		socket.emit("welcome", {msg:"You are player 2!!!"});
+		socket.emit("welcome", {msg:"playerTwo"});
 	} else {
 		socket.emit("welcome", {msg: "You are not welcome."});
 		socket.destroy();

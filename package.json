@@ -4,7 +4,8 @@
   "description": "A tiny little rock paper scissors game.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+	"prestart": "webpack",
+    "start": "node app"
   },
   "repository": {
     "type": "git",

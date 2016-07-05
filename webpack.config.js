@@ -3,6 +3,10 @@ module.exports = {
   output: {
     filename: "public/client.min.js"
   },
+  devServer: {
+    inline: true,
+    port: 3333
+  },
   module: {
     loaders: [
       {
