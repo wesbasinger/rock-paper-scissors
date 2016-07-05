@@ -22,9 +22,11 @@ io.on('connection', socket => {
 	if (players.length === 0) {
 		players.push(socket);
 		socket.emit("welcome", {msg:"playerOne"});
+		socket.emit('status', {msg: "Waiting for another player..."})
 	} else if (players.length == 1) {
 		players.push(socket);
 		socket.emit("welcome", {msg:"playerTwo"});
+		players.forEach(player => {player.emit('status', {msg: "Game on, all players ready."})});
 	} else {
 		socket.emit("welcome", {msg: "You are not welcome."});
 		socket.destroy();

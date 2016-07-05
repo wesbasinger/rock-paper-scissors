@@ -9,13 +9,19 @@ var Game = React.createClass({
 			playerPosition: "",
 			result: "",
 			playerOneChoice: "",
-			playerTwoChoice: ""
+			playerTwoChoice: "",
+			message: ""
 		}
 	},
 
 	componentDidMount() {
 		socket.on('welcome', this.welcome);
 		socket.on('gameOver', this.gameOver);
+		socket.on('status', this.handleStatus);
+	},
+
+	handleStatus(data) {
+		this.setState({message: data.msg});
 	},
 
 	welcome(data) {
@@ -69,7 +75,8 @@ var Game = React.createClass({
 
 		return(
 			<div>
-				<h1>Messages: {this.state.playerPosition} </h1>
+				<h1>Messages: {this.state.message}</h1>
+				<h1>You Are: {this.state.playerPosition} </h1>
 				<h1>Player One: {this.state.playerOneChoice || "Not played yet."}</h1>
 				<h1>Player Two: {this.state.playerTwoChoice || "Not played yet."}</h1>
 				<input type="radio" name="uplay" value="rock" onChange={this.handleChange}/>Rock <br />
