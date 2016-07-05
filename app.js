@@ -51,18 +51,11 @@ io.on('connection', socket => {
 		}
 	});
 
-	// socket.on('newGame', () => {
-	// 	if (playedCount != 0) {
-	// 		playedCount = 0;
-	// 	}
-	// 	if (game != {}) {
-	// 		game = {};
-	// 	}
-	// });
-
-
 	socket.on('disconnect', () => {
 		players.splice(players.indexOf(socket), 1);
+		players.forEach(player => {
+			player.emit('playerLeft', {msg: "The other player left"});
+		})
 		console.log('a user disconnected.');
 	});
 });

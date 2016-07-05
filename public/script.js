@@ -18,6 +18,11 @@ var Game = React.createClass({
 		socket.on('welcome', this.welcome);
 		socket.on('gameOver', this.gameOver);
 		socket.on('status', this.handleStatus);
+		socket.on('playerLeft', this.handlePlayerLeft);
+	},
+
+	handlePlayerLeft(data) {
+		this.setState({message: data.msg, playerPosition: "playerOne"});
 	},
 
 	handleStatus(data) {
@@ -44,6 +49,7 @@ var Game = React.createClass({
 				this.setState({result: "Your are the loser!"});
 			}
 		}
+		this.setState({message: "Game over, click New Game!"});
 	},
 
 	handleChange(e, value) {
@@ -55,6 +61,7 @@ var Game = React.createClass({
 	},
 
 	handlePlay(e) {
+		this.setState({message: "Waiting on the other player..."});
 		socket.emit(
 			'played',
 			{
