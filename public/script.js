@@ -14,10 +14,20 @@ var Game = React.createClass({
 
 	componentDidMount() {
 		socket.on('welcome', this.welcome);
+		socket.on('gameOver', this.gameOver);
 	},
 
 	welcome(data) {
 		this.setState({playerPosition: data.msg});
+	},
+
+	gameOver(data) {
+		this.setState({result: data.winner});
+		if (this.state.playerOneChoice==="") {
+			this.setState({playerOneChoice:data.player1});
+		} else {
+			this.setState({playerTwoChoice:data.player2});
+		}
 	},
 
 	handleChange(e, value) {
@@ -42,8 +52,8 @@ var Game = React.createClass({
 		return(
 			<div>
 				<h1>Messages: {this.state.playerPosition} </h1>
-				<h1>Player One: {this.state.playerOneChoice}</h1>
-				<h1>Player Two: {this.state.playerTwoChoice}</h1>
+				<h1>Player One: {this.state.playerOneChoice || "Not played yet."}</h1>
+				<h1>Player Two: {this.state.playerTwoChoice || "Not played yet."}</h1>
 				<input
 					type="radio"
 					name="uplay"
@@ -60,7 +70,7 @@ var Game = React.createClass({
 					value="scissors"
 					onChange={this.handleChange}/> Scissors <br />
 				<button onClick={this.handlePlay}>Play</button>
-				<h1>Result: Result goes here...</h1>
+				<h1>Result: {this.state.result || "No result yet!"}</h1>
 			</div>
 		)
 	}
