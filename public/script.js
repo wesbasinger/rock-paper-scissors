@@ -22,11 +22,20 @@ var Game = React.createClass({
 	},
 
 	gameOver(data) {
-		this.setState({result: data.winner});
 		if (this.state.playerOneChoice==="") {
 			this.setState({playerOneChoice:data.player1});
+			if (this.state.playerTwoChoice===data.winner) {
+				this.setState({result: "You are the winner!"});
+			} else {
+				this.setState({result: "You are the loser!"});
+			}
 		} else {
 			this.setState({playerTwoChoice:data.player2});
+			if (this.state.playerOneChoice===data.winner) {
+				this.setState({result: "You are the winner!"});
+			} else {
+				this.setState({result: "Your are the loser!"});
+			}
 		}
 	},
 
@@ -54,7 +63,7 @@ var Game = React.createClass({
 				<h1>Messages: {this.state.playerPosition} </h1>
 				<h1>Player One: {this.state.playerOneChoice || "Not played yet."}</h1>
 				<h1>Player Two: {this.state.playerTwoChoice || "Not played yet."}</h1>
-				<input type="radio" name="uplay" value="rock" onChange={this.handleChange}/> Rock <br />
+				<input type="radio" name="uplay" value="rock" onChange={this.handleChange}/>Rock <br />
 				<input type="radio" name="uplay" value="paper" onChange={this.handleChange}/> Paper <br />
 				<input type="radio" name="uplay" value="scissors" onChange={this.handleChange}/> Scissors <br />
 				<button onClick={this.handlePlay}>Play</button>
