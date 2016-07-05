@@ -21,6 +21,11 @@ var Game = React.createClass({
 		socket.on('gameOver', this.gameOver);
 		socket.on('status', this.handleStatus);
 		socket.on('playerLeft', this.handlePlayerLeft);
+		socket.on('notWelcome', this.notWelcome);
+	},
+
+	notWelcome(data) {
+		this.setState({message: data.msg});
 	},
 
 	handlePlayerLeft(data) {

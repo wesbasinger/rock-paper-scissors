@@ -28,8 +28,7 @@ io.on('connection', socket => {
 		socket.emit("welcome", {msg:"playerTwo"});
 		players.forEach(player => {player.emit('status', {msg: "Game on, all players ready."})});
 	} else {
-		socket.emit("welcome", {msg: "You are not welcome."});
-		socket.destroy();
+		socket.emit("notWelcome", {msg: "Server is full.  Try again later..."});
 	}
 
 	socket.on('played', packet => {
