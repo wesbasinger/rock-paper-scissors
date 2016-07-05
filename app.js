@@ -41,6 +41,7 @@ io.on('connection', socket => {
 			console.error("I don't know what happened.")
 		}
 		if (playedCount === 2) {
+			playedCount = 0;
 			var champ = winner(game.player1, game.player2);
 			players.forEach(player => {
 				player.emit('gameOver', {winner:champ, player1:game.player1, player2:game.player2});
@@ -48,14 +49,14 @@ io.on('connection', socket => {
 		}
 	});
 
-	socket.on('newGame', () => {
-		if (playedCount != 0) {
-			playedCount = 0;
-		}
-		if (game != {}) {
-			game = {};
-		}
-	});
+	// socket.on('newGame', () => {
+	// 	if (playedCount != 0) {
+	// 		playedCount = 0;
+	// 	}
+	// 	if (game != {}) {
+	// 		game = {};
+	// 	}
+	// });
 
 
 	socket.on('disconnect', () => {

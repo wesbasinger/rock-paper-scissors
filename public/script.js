@@ -1,6 +1,7 @@
 var socket = io();
 var React = require('react');
 var ReactDOM = require('react-dom');
+var $ = require('jquery');
 
 var Game = React.createClass({
 	getInitialState() {
@@ -57,7 +58,15 @@ var Game = React.createClass({
 			});
 	},
 
+	newGameGen() {
+		this.setState({result: "", playerOneChoice: "", playerTwoChoice: ""});
+		$('input[name="uplay"]').prop('checked', false);
+	},
+
  	render() {
+
+		var newGameButton = (this.state.result) ? <button onClick={this.newGameGen}>New Game</button> : "";
+
 		return(
 			<div>
 				<h1>Messages: {this.state.playerPosition} </h1>
@@ -68,6 +77,7 @@ var Game = React.createClass({
 				<input type="radio" name="uplay" value="scissors" onChange={this.handleChange}/> Scissors <br />
 				<button onClick={this.handlePlay}>Play</button>
 				<h1>Result: {this.state.result}</h1>
+				{newGameButton}
 			</div>
 		)
 	}
