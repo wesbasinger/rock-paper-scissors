@@ -10,7 +10,9 @@ var Game = React.createClass({
 			result: "",
 			playerOneChoice: "",
 			playerTwoChoice: "",
-			message: ""
+			message: "",
+			wins: 0,
+			losses: 0
 		}
 	},
 
@@ -37,16 +39,16 @@ var Game = React.createClass({
 		if (this.state.playerOneChoice==="") {
 			this.setState({playerOneChoice:data.player1});
 			if (this.state.playerTwoChoice===data.winner) {
-				this.setState({result: "You are the winner!"});
+				this.setState({result: "You are the winner!", wins: this.state.wins + 1});
 			} else {
-				this.setState({result: "You are the loser!"});
+				this.setState({result: "You are the loser!", losses: this.state.losses + 1});
 			}
 		} else {
 			this.setState({playerTwoChoice:data.player2});
 			if (this.state.playerOneChoice===data.winner) {
-				this.setState({result: "You are the winner!"});
+				this.setState({result: "You are the winner!", wins: this.state.wins + 1});
 			} else {
-				this.setState({result: "Your are the loser!"});
+				this.setState({result: "Your are the loser!", losses: this.state.losses + 1});
 			}
 		}
 		this.setState({message: "Game over, click New Game!"});
@@ -99,6 +101,17 @@ var Game = React.createClass({
 				<button onClick={this.handlePlay}>Play</button>
 				<h1>Result: {this.state.result}</h1>
 				{newGameButton}
+				<h1>Scoreboard</h1>
+				<table>
+					<tr>
+						<td>Wins</td>
+						<td>Losses</td>
+					</tr>
+					<tr>
+						<td>{this.state.wins}</td>
+						<td>{this.state.losses}</td>
+					</tr>
+				</table>
 			</div>
 		)
 	}
