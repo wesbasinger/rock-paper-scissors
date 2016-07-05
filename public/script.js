@@ -6,9 +6,9 @@ var Game = React.createClass({
 	getInitialState() {
 		return {
 			playerPosition: "",
-			playerChoice: "",
 			result: "",
-			choice: ""
+			playerOneChoice: "",
+			playerTwoChoice: ""
 		}
 	},
 
@@ -21,15 +21,26 @@ var Game = React.createClass({
 	},
 
 	handleChange(e, value) {
-		this.setState({choice: e.target.value});
+		if (this.state.playerPosition == "playerOne") {
+			this.setState({playerOneChoice: e.target.value});
+		} else {
+			this.setState({playerTwoChoice: e.target.value})
+		}
+		socket.emit(
+			'played',
+			{
+				player: this.state.playerPosition,
+				playerOneChoice: this.state.playerOneChoice,
+				playerTwoChoice: this.state.playerTwoChoice
+			})
 	},
 
  	render() {
 		return(
 			<div>
 				<h1>Messages: {this.state.playerPosition} </h1>
-				<h1>Player One: Player one goes here...</h1>
-				<h1>Player Two: Player two goes here...</h1>
+				<h1>Player One: {this.state.playerOneChoice}</h1>
+				<h1>Player Two: {this.state.playerTwoChoice}</h1>
 				<input
 					type="radio"
 					name="uplay"
